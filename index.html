@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TomX | Roblox Builder Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: #0f0f0f;
+    color: white;
+    overflow-x: hidden;
+}
+
+section {
+    padding: 100px 10%;
+}
+
+h1, h2 {
+    font-weight: 800;
+}
+
+p {
+    color: #aaa;
+    line-height: 1.6;
+}
+
+/* HERO */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    animation: fadeIn 1.5s ease;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    background: linear-gradient(90deg, #ffae00, #ff0066);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero span {
+    font-size: 1.2rem;
+    color: #ccc;
+}
+
+/* ABOUT */
+.about {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation: slideUp 1.5s ease;
+}
+
+/* GALLERY */
+.gallery {
+    position: relative;
+    max-width: 100%;
+    margin-top: 50px;
+}
+
+.slider {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
+
+.slide {
+    min-width: 100%;
+    transition: transform 0.6s ease-in-out;
+}
+
+.slide img {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+.buttons {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.buttons button {
+    background: rgba(0,0,0,0.6);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.buttons button:hover {
+    background: #ff0066;
+}
+
+/* SKILLS */
+.skills {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.skill-card {
+    background: #1a1a1a;
+    padding: 30px;
+    border-radius: 15px;
+    transition: 0.4s;
+}
+
+.skill-card:hover {
+    transform: translateY(-10px);
+    background: #222;
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes slideUp {
+    from {transform: translateY(40px); opacity: 0;}
+    to {transform: translateY(0); opacity: 1;}
+}
+
+footer {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+    <h1>TomX</h1>
+    <span>aka donut • Roblox Builder & FPS Map Designer</span>
+</section>
+
+<section class="about">
+    <h2>About Me</h2>
+    <p>
+        I'm TomX, also known as donut — a professional Roblox developer with over 4 years of experience.
+        I specialize in studio-quality building and competitive FPS map design inspired by games like Rivals.
+        My expertise covers realistic environments, optimized competitive layouts, and high-quality Blender modeling.
+    </p>
+    <p>
+        I focus on clean topology, performance optimization, strong map flow, and immersive design.
+        Whether it's stylized builds, FPS arenas, or custom high-quality assets — I deliver professional results.
+    </p>
+</section>
+
+<section>
+    <h2>Featured Work</h2>
+
+    <div class="gallery">
+        <div class="slider" id="slider">
+            <div class="slide"><img src="images/build1.jpg" alt=""></div>
+            <div class="slide"><img src="images/build2.jpg" alt=""></div>
+            <div class="slide"><img src="images/fps1.jpg" alt=""></div>
+            <div class="slide"><img src="images/fps2.jpg" alt=""></div>
+            <div class="slide"><img src="images/blender1.jpg" alt=""></div>
+        </div>
+
+        <div class="buttons">
+            <button onclick="prevSlide()">❮</button>
+            <button onclick="nextSlide()">❯</button>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Skills</h2>
+    <div class="skills">
+        <div class="skill-card">
+            <h3>Studio Building</h3>
+            <p>Advanced environment design, realistic lighting, optimized geometry.</p>
+        </div>
+        <div class="skill-card">
+            <h3>FPS Map Design</h3>
+            <p>Competitive flow, strategic angles, balanced layouts inspired by Rivals-style gameplay.</p>
+        </div>
+        <div class="skill-card">
+            <h3>Blender Modeling</h3>
+            <p>High-quality custom meshes, props, and detailed assets.</p>
+        </div>
+        <div class="skill-card">
+            <h3>Optimization</h3>
+            <p>Performance-focused building with clean structure and efficient asset usage.</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    © 2026 TomX (donut) • Roblox Developer Portfolio
+</footer>
+
+<script>
+let currentIndex = 0;
+
+function showSlide(index) {
+    const slider = document.getElementById("slider");
+    const slides = document.querySelectorAll(".slide");
+    if (index >= slides.length) currentIndex = 0;
+    else if (index < 0) currentIndex = slides.length - 1;
+    else currentIndex = index;
+
+    slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+}
+
+function nextSlide() {
+    showSlide(currentIndex + 1);
+}
+
+function prevSlide() {
+    showSlide(currentIndex - 1);
+}
+</script>
+
+</body>
+</html>
